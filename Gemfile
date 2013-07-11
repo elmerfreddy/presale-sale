@@ -37,6 +37,8 @@ end
 gem 'devise', '3.0.0.rc'
 gem 'haml-rails'
 
+gem 'rails_12factor', group: :production
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
