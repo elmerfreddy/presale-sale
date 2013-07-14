@@ -1,0 +1,11 @@
+= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), html: { class: 'form-signin' }) do |f|
+  %h2 Sign in
+  .form-inputs
+    = f.input :email, :required => false, :autofocus => true, input_html: { class: 'input-block-level', placeholder: 'Email' }, label: false, as: :string
+    = f.input :password, :required => false, input_html: { class: 'input-block-level', placeholder: 'Password' }, label: false
+    - if devise_mapping.rememberable?
+      %label.checkbox
+        = f.check_box :remember_me
+        Remember me
+  = f.button :submit, "Sign in", class: 'btn btn-primary span2'
+  = render "devise/shared/links"
