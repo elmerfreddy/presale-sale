@@ -6,17 +6,22 @@
       .form-inputs
         = f.association :store
 
-      .form-inputs
+      #fields-add-product.form-inputs
         .controls
-          = link_to '#', class: 'btn btn-success' do
+          = link_to '#', class: 'btn btn-success show-product-form' do
             %i.icon-plus.icon-white
             Add product
-      %br/
-      .form-inputs
+      #fields-for-product.well{ style: 'display: none;' }
         - f.object.details.build
         = f.simple_fields_for :details do |f_detail|
           = f_detail.association :product
           = f_detail.input :quantity
+        .form-inputs
+          .controls
+            = link_to '#', class: 'btn btn-success', id: 'add-product' do
+              %i.icon-plus.icon-white
+              Add product
+            = link_to 'Cancel', '#', class: 'btn show-product-form'
 
     .span7
       %table.table.table-striped.table-hover
