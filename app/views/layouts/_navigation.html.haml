@@ -1,6 +1,9 @@
 = link_to "Presale", root_path, :class => 'brand'
 %ul.nav
-  %li= link_to 'Products', products_path
+  %li{ class: "#{ controller_name == 'products' ? 'active' : '' }" }
+    = link_to 'Products', products_path
+  %li{ class: "#{ controller_name == 'stores' ? 'active' : '' }" }
+    = link_to 'Stores', stores_path
 %ul.nav.pull-right
   - if user_signed_in?
     %li

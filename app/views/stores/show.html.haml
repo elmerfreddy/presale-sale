@@ -1,21 +1,15 @@
-%p#notice= notice
+= show_title('Store', @store.name)
 
-%p
-  %b Name:
-  = @store.name
-%p
-  %b Owner:
-  = @store.owner
-%p
-  %b Address:
-  = @store.address
-%p
-  %b Latitude:
-  = @store.latitude
-%p
-  %b Longitude:
-  = @store.longitude
+%dl.dl-horizontal
+  %dt.muted Owner
+  %dd= @store.owner
+  %dt.muted Address
+  %dd= @store.address
+  %dt.muted Latitude
+  %dd= @store.latitude
+  %dt.muted Longitude
+  %dd= @store.longitude
 
-= link_to 'Edit', edit_store_path(@store)
-\|
-= link_to 'Back', stores_path
+.form-actions
+  = link_to 'Edit', edit_store_path(@store), class: 'btn'
+  = link_to 'Back', stores_path, class: 'btn btn-info'

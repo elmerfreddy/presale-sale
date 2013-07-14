@@ -1,27 +1,27 @@
-%h1 Listing stores
+= show_title('Listing', 'stores')
 
-%table
-  %tr
-    %th Name
-    %th Owner
-    %th Address
-    %th Latitude
-    %th Longitude
-    %th
-    %th
-    %th
-
-  - @stores.each do |store|
+%table.table.table-striped.table-hover.table-condensed
+  %thead
     %tr
-      %td= store.name
-      %td= store.owner
-      %td= store.address
-      %td= store.latitude
-      %td= store.longitude
-      %td= link_to 'Show', store
-      %td= link_to 'Edit', edit_store_path(store)
-      %td= link_to 'Destroy', store, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %th Id
+      %th Name
+      %th Owner
+      %th Address
+      %th Latitude
+      %th Longitude
+      %th
+  %tbody
+    - @stores.each do |store|
+      %tr
+        %td= store.id
+        %td= link_to store.name, store
+        %td= store.owner
+        %td= store.address
+        %td= store.latitude
+        %td= store.longitude
+        %td
+          = edit_link_to 'Edit', edit_store_path(store)
+          = destroy_link_to 'Destroy', store
 
 %br
-
-= link_to 'New Store', new_store_path
+= new_item_path('New Store', new_store_path)

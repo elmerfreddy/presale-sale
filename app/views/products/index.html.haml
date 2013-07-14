@@ -1,7 +1,4 @@
-.page-header
-  %h2
-    %span.muted Listing
-    products
+= show_title('Listing', 'products')
 
 %table.table.table-striped.table-hover.table-condensed
   %thead
@@ -19,15 +16,8 @@
         %td= number_to_currency product.price
         %td= l product.created_at, format: :long
         %td
-          = link_to edit_product_path(product), class: 'btn btn-mini' do
-            %i.icon-edit
-            Edit
-          = link_to product, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-mini btn-danger' do
-            %i.icon-remove.icon-white
-            Destroy
+          = edit_link_to 'Edit', edit_product_path(product)
+          = destroy_link_to 'Destroy', product
 
 %br
-
-= link_to new_product_path, class: 'btn btn-primary' do
-  %i.icon-plus.icon-white
-  New Product
+= new_item_path('New Product', new_product_path)
