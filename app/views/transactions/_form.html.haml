@@ -1,9 +1,56 @@
-= simple_form_for @transaction, html: { class: 'form-horizontal' } do |f|
-  = display_base_errors @transaction
-  .form-inputs
-    = f.association :user
-    = f.association :store
+.row
+  = simple_form_for @transaction, html: { class: 'form-horizontal' } do |f|
+    .span5
+      = display_base_errors @transaction
 
-  .form-actions
-    = f.button :submit, class: 'btn btn-primary'
-    = link_to 'Cancel', transactions_path, :class => 'btn'
+      .form-inputs
+        = f.association :store
+
+      .form-inputs
+        .controls
+          = link_to '#', class: 'btn btn-success' do
+            %i.icon-plus.icon-white
+            Add product
+      %br/
+      .form-inputs
+        - f.object.details.build
+        = f.simple_fields_for :details do |f_detail|
+          = f_detail.association :product
+          = f_detail.input :quantity
+
+    .span7
+      %table.table.table-striped.table-hover
+        %thead
+          %tr
+            %th #
+            %th.span7 Product
+            %th Price
+            %th Quantity
+            %th Total
+            %th.span1
+        %tbody
+          - Product.all.each_with_index do |product, index|
+            %tr
+              %td= index + 1
+              %td= product.name
+              %td= number_to_currency product.price
+              %td 0
+              %td= number_to_currency 0
+              %td
+                = link_to '#', title: 'Edit' do
+                  %i.icon-edit
+                = link_to '#', title: 'Remove' do
+                  %i.icon-remove
+        %tfoot
+          %tr
+            %th
+            %th
+            %th
+            %th.muted Total
+            %th= number_to_currency 100
+            %th
+
+    .span12
+      .form-actions
+        = f.button :submit, class: 'btn btn-primary'
+        = link_to 'Cancel', transactions_path, :class => 'btn'
