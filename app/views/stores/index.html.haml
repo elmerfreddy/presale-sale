@@ -1,0 +1,27 @@
+= show_title('Listing', 'stores')
+
+%table.table.table-striped.table-hover.table-condensed
+  %thead
+    %tr
+      %th Id
+      %th Name
+      %th Owner
+      %th Address
+      %th Latitude
+      %th Longitude
+      %th
+  %tbody
+    - @stores.each do |store|
+      %tr
+        %td= store.id
+        %td= link_to store.name, store
+        %td= store.owner
+        %td= store.address
+        %td= store.latitude
+        %td= store.longitude
+        %td
+          = edit_link_to 'Edit', edit_store_path(store)
+          = destroy_link_to 'Destroy', store
+
+%br
+= new_item_path('New Store', new_store_path)
