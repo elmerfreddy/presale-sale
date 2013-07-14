@@ -1,21 +1,33 @@
-%h1 Listing products
+.page-header
+  %h2
+    %span.muted Listing
+    products
 
-%table
-  %tr
-    %th Name
-    %th Price
-    %th
-    %th
-    %th
-
-  - @products.each do |product|
+%table.table.table-striped.table-hover.table-condensed
+  %thead
     %tr
-      %td= product.name
-      %td= product.price
-      %td= link_to 'Show', product
-      %td= link_to 'Edit', edit_product_path(product)
-      %td= link_to 'Destroy', product, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %th Id
+      %th Name
+      %th Price
+      %th Created At
+      %th
+  %tbody
+    - @products.each do |product|
+      %tr
+        %td= product.id
+        %td= link_to product.name, product
+        %td= number_to_currency product.price
+        %td= l product.created_at, format: :long
+        %td
+          = link_to edit_product_path(product), class: 'btn btn-mini' do
+            %i.icon-edit
+            Edit
+          = link_to product, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-mini btn-danger' do
+            %i.icon-remove.icon-white
+            Destroy
 
 %br
 
-= link_to 'New Product', new_product_path
+= link_to new_product_path, class: 'btn btn-primary' do
+  %i.icon-plus.icon-white
+  New Product
