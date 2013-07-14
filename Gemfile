@@ -41,3 +41,4 @@ gem 'haml-rails'
 gem 'rails_12factor', group: :production
 
 gem 'active_model_serializers'
+gem 'simple_form', '>= 3.0.0.rc'
