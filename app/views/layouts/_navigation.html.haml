@@ -4,6 +4,8 @@
     = link_to 'Products', products_path
   %li{ class: "#{ controller_name == 'stores' ? 'active' : '' }" }
     = link_to 'Stores', stores_path
+  %li{ class: "#{ controller_name == 'transactions' ? 'active' : '' }" }
+    = link_to 'Transactions', transactions_path
 %ul.nav.pull-right
   - if user_signed_in?
     %li

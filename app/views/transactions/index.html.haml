@@ -1,0 +1,25 @@
+= show_title('Listing', 'transactions')
+
+%table.table.table-striped.table-hover.table-condensed
+  %thead
+    %tr
+      %th Id
+      %th User
+      %th Store
+      %th Products
+      %th Created At
+      %th
+  %tbody
+    - @transactions.each do |transaction|
+      %tr
+        %td= transaction.id
+        %td= transaction.user_name
+        %td= transaction.store_name
+        %td= link_to pluralize(0, 'product'), transaction
+        %td= l transaction.created_at, format: :long
+        %td
+          = edit_link_to 'Edit', edit_transaction_path(transaction)
+          = destroy_link_to 'Destroy', transaction
+
+%br
+= new_item_path('New Transaction', new_transaction_path)

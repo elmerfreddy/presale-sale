@@ -1,4 +1,6 @@
 Presale::Application.routes.draw do
+  resources :transactions
+
   resources :stores
 
   resources :products
