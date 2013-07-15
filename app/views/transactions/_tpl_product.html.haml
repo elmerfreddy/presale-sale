@@ -1,0 +1,18 @@
+%script{ type: 'text/html', id: 'tpl_product' }
+  .control-group.select.optional.transaction_details_product
+    %label.select.optional.control-label{:for => "transaction_details_attributes_{{id}}_product_id"} Product
+    .controls
+      %select.select.optional{:name => "transaction[details_attributes][{{id}}][product_id]", id: "transaction_details_attributes_{{id}}_product_id" }
+        {{#products}}
+        %option{:value => "{{id}}"} {{name}}
+        {{/products}}
+  .control-group.integer.optional.transaction_details_quantity
+    %label.integer.optional.control-label{:for => "transaction_details_attributes_{{id}}_quantity"} Quantity
+    .controls
+      %input.numeric.integer.optional{:name => "transaction[details_attributes][{{id}}][quantity]", :step => "1", :type => "number", :value => "0", id: "transaction_details_attributes_{{id}}_quantity" }/
+  .form-inputs
+    .controls
+      %a#add-product.btn.btn-success{:href => "#"}
+        %i.icon-plus.icon-white
+        Add product
+      %a.btn.show-product-form{:href => "#"} Cancel
