@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130711043539) do
+ActiveRecord::Schema.define(version: 20130714190045) do
+
+  create_table "details", force: true do |t|
+    t.integer  "product_id"
+    t.integer  "transaction_id"
+    t.integer  "quantity",       default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "details", ["product_id"], name: "index_details_on_product_id", using: :btree
+  add_index "details", ["transaction_id"], name: "index_details_on_transaction_id", using: :btree
 
   create_table "products", force: true do |t|
     t.string   "name"
@@ -19,6 +30,26 @@ ActiveRecord::Schema.define(version: 20130711043539) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "stores", force: true do |t|
+    t.string   "name"
+    t.string   "owner"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transactions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "store_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "transactions", ["store_id"], name: "index_transactions_on_store_id", using: :btree
+  add_index "transactions", ["user_id"], name: "index_transactions_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

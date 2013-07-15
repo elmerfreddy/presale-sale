@@ -6,4 +6,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
          :rememberable, :trackable, :validatable,
          :token_authenticatable
+
+  def full_name
+    email
+  end
+
+  def name
+    full_name
+  end
 end

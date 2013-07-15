@@ -1,0 +1,15 @@
+= show_title('Store', @store.name)
+
+%dl.dl-horizontal
+  %dt.muted Owner
+  %dd= @store.owner
+  %dt.muted Address
+  %dd= @store.address
+  %dt.muted Latitude
+  %dd= @store.latitude
+  %dt.muted Longitude
+  %dd= @store.longitude
+
+.form-actions
+  = link_to 'Edit', edit_store_path(@store), class: 'btn'
+  = link_to 'Back', stores_path, class: 'btn btn-info'

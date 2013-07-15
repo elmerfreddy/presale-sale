@@ -7,7 +7,7 @@ module ApplicationHelper
   # <%= simple_form_for ... %>
   #   <%= f.error_notification %>
   #   <%= display_base_errors resource %>
-   def display_base_errors resource
+  def display_base_errors resource
     return '' if (resource.errors.empty?) or (resource.errors[:base].empty?)
     messages = resource.errors[:base].map { |msg| content_tag(:p, msg) }.join
     html = <<-HTML
@@ -17,5 +17,33 @@ module ApplicationHelper
     </div>
     HTML
     html.html_safe
+  end
+
+  def destroy_link_to(title, url)
+    link_to url, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-mini btn-danger' do
+      content_tag(:i, nil, class: 'icon-remove icon-white') + title
+    end
+  end
+
+  def edit_link_to(title, url)
+    link_to url, class: 'btn btn-mini' do
+      content_tag(:i, nil, class: 'icon-edit') + title
+    end
+  end
+
+  def new_item_path(name, url)
+    content_tag :a, href: url, class: 'btn btn-primary' do
+      content_tag(:i, nil, class: 'icon-plus icon-white') +
+      name
+    end
+  end
+
+  def show_title(title, title_desc)
+    content_tag :div, class: 'page-header' do
+      content_tag :h2 do
+        content_tag(:span, title, class: 'muted') + ' ' +
+        title_desc
+      end
+    end
   end
 end

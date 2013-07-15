@@ -1,0 +1,11 @@
+= simple_form_for @store, html: { class: 'form-horizontal' } do |f|
+  = display_base_errors @store
+  .form-inputs
+    = f.input :name
+    = f.input :owner
+    = f.input :address
+    = f.input :latitude
+    = f.input :longitude
+  .form-actions
+    = f.button :submit, class: 'btn btn-primary'
+    = link_to 'Cancel', stores_path, :class => 'btn'
