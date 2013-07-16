@@ -12,3 +12,14 @@
  */
 @import 'bootstrap_and_overrides';
 @import 'typeahead';
+
+table {
+  tr {
+    td {
+      &.number {
+        padding-right: 40px;
+        text-align: right;
+      }
+    }
+  }
+}

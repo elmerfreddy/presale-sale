@@ -13,6 +13,8 @@ load_search_products = ->
     $(@).data('price', data.price)
 
 jQuery ->
+  $('span.number').number(true, 2)
+
   $(document).on 'click', '#add-product', (e) ->
     $('#fields-for-product').toggle()
     $('#fields-add-product').toggle()

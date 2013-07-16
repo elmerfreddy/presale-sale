@@ -31,8 +31,8 @@ module ApplicationHelper
     end
   end
 
-  def new_item_path(name, url)
-    content_tag :a, href: url, class: 'btn btn-primary' do
+  def new_item_path(name, url, options = {})
+    link_to url, options.merge!({ class: 'btn btn-primary' }) do
       content_tag(:i, nil, class: 'icon-plus icon-white') +
       name
     end

@@ -20,6 +20,7 @@
 //= require bootstrap-tooltip
 //= require typeahead
 //= require hogan
+//= require jquery.number
 //= require transactions
 //= require_self
 

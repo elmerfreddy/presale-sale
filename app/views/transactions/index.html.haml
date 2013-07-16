@@ -22,4 +22,4 @@
           = destroy_link_to 'Destroy', transaction
 
 %br
-= new_item_path('New Transaction', new_transaction_path)
+= new_item_path('New Transaction', new_transaction_path, 'data-no-turbolink' => 1)
