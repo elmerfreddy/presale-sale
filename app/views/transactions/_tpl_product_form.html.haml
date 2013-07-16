@@ -1,0 +1,13 @@
+%script{ type: 'text/html', id: 'tpl_product_form' }
+  .control-group.select.optional.transaction_details_product
+    .controls
+      = text_field_tag 'product', '', class: 'string optional', style: 'width: 98%', placeholder: 'Select product...'
+  .control-group.integer.optional.transaction_details_quantity
+    .controls
+      %input.numeric.integer.optional{name: "quantity", step: "1", type: "number", style: 'width: 98%', placeholder: 'Quantity' }/
+  .form-inputs
+    .controls
+      %a#add-product.btn.btn-success{:href => "#"}
+        %i.icon-plus.icon-white
+        Add product
+      %a.btn.show-product-form{:href => "#"} Cancel

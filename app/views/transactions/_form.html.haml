@@ -1,31 +1,35 @@
 = render 'tpl_product'
+= render 'tpl_store'
+= render 'tpl_product_form'
 
 .row
-  = simple_form_for @transaction, html: { class: 'form-horizontal' } do |f|
-    .span5
-      = display_base_errors @transaction
-
-      .form-inputs
-        = f.association :store
-
-      #fields-add-product.form-inputs
+  .span5
+    .well
+      .control-group.select.optional.transaction_details_product
         .controls
-          = link_to '#', class: 'btn btn-success show-product-form' do
-            %i.icon-plus.icon-white
-            Add product
-      #fields-for-product.well{ style: 'display: none;' }
-        /- f.object.details.build
-        /= f.simple_fields_for :details do |f_detail|
-        /  = f_detail.input :product, as: :string
-        /  = f_detail.input :quantity
-        /.form-inputs
-        /  .controls
-        /    = link_to '#', class: 'btn btn-success', id: 'add-product' do
-        /      %i.icon-plus.icon-white
-        /      Add product
-        /    = link_to 'Cancel', '#', class: 'btn show-product-form'
+          = text_field_tag 'store', '', placeholder: 'Select store...', class: 'search-stores string optional', style: 'width: 98%;'
 
-    .span7
+    #fields-add-product.form-inputs
+      .controls
+        = link_to '#', class: 'btn btn-success show-product-form' do
+          %i.icon-plus.icon-white
+          Add product
+    #fields-for-product.well{ style: 'display: none;' }
+      /- f.object.details.build
+      /= f.simple_fields_for :details do |f_detail|
+      /  = f_detail.input :product, as: :string
+      /  = f_detail.input :quantity
+      /.form-inputs
+      /  .controls
+      /    = link_to '#', class: 'btn btn-success', id: 'add-product' do
+      /      %i.icon-plus.icon-white
+      /      Add product
+      /    = link_to 'Cancel', '#', class: 'btn show-product-form'
+
+  = simple_form_for @transaction, html: { class: 'form-horizontal' } do |f|
+    = display_base_errors @transaction
+    #selected-products.span7
+      %h2.muted Store name
       %table.table.table-striped.table-hover
         %thead
           %tr
