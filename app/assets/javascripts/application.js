@@ -19,8 +19,7 @@
 //= require bootstrap-tab
 //= require bootstrap-tooltip
 //= require typeahead
-//= require hogan.js
-//= require_tree ./templates
+//= require hogan
 //= require transactions
 //= require_self
 
