@@ -20,7 +20,10 @@
   = simple_form_for @transaction, html: { class: 'form-horizontal' } do |f|
     = display_base_errors @transaction
     #selected-products.span7
-      %h2.muted Store name
+      - if @transaction.new_record? && !@transaction.store.present?
+        %h2.muted Store name
+      - elsif @transaction.store.present?
+        %h2= @transaction.store_name
       %table.table.table-striped.table-hover
         %thead
           %tr
@@ -29,16 +32,31 @@
             %th Price
             %th Quantity
             %th Total
-            %th.span1
+            %th.span2
         %tbody
-
+          - @transaction.details.each_with_index do |detail, index|
+            %tr
+              %td= index + 1
+              %td= detail.product_name
+              %td.number= number_to_currency detail.price
+              %td.number= detail.quantity
+              %td.number= number_to_currency detail.total
+              %td
+                = link_to '#', title: 'Edit', class: 'edit-product' do
+                  %i.icon-edit
+                = link_to '#', title: 'Remove', class: 'remove-product' do
+                  %i.icon-remove
         %tfoot
           %tr
             %th
             %th
             %th
             %th.muted Total
-            %th.number#selected-products-total 0
+            %th.number#selected-products-total
+              - if @transaction.new_record? && !@transaction.store.present?
+                0
+              - elsif @transaction.store.present?
+                = number_with_precision @transaction.total, precision: 2
             %th
 
     .span12

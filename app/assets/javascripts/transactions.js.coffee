@@ -58,6 +58,13 @@ jQuery ->
 
   load_search_products()
 
+  $(document).on 'click', '.remove-product', (e) ->
+    $(@).closest('tr').remove()
+    e.preventDefault()
+
+  $(document).on 'click', '.edit-product', (e) ->
+    e.preventDefault()
+
 class Transaction
   constructor: (@input) ->
     @reset()
