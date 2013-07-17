@@ -25,13 +25,14 @@ jQuery ->
     data =
       sequence: $selected_products.find('tbody tr').length + 1
       name: $product_name.data('name')
-      price: $product_name.data('price')
+      price: $.number($product_name.data('price'), 2)
       quantity: $product_quantity.val()
-      total: $product_quantity.val() * $product_name.data('price')
+      total: $.number($product_quantity.val() * $product_name.data('price'), 2)
     template = Hogan.compile($('#tpl_product_list').html())
     html = template.render(data)
     $selected_products.find('tbody').append(html)
-    $product_total.html(parseFloat($product_total.text()) + parseFloat(data['total']))
+    total = parseFloat($product_total.text()) + parseFloat(data['total'])
+    $product_total.html($.number(total, 2))
     e.preventDefault()
 
   $(document).on 'click', '.show-product-form', (e) ->

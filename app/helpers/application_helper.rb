@@ -31,6 +31,12 @@ module ApplicationHelper
     end
   end
 
+  def json_for(target, options = {})
+    options[:scope] ||= self
+    options[:url_options] ||= url_options
+    target.active_model_serializer.new(target, options).to_json
+  end
+
   def new_item_path(name, url, options = {})
     link_to url, options.merge!({ class: 'btn btn-primary' }) do
       content_tag(:i, nil, class: 'icon-plus icon-white') +
