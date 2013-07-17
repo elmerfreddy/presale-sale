@@ -18,7 +18,7 @@
         %td= link_to pluralize(transaction.details.count, 'product'), transaction
         %td= l transaction.created_at, format: :long
         %td
-          = edit_link_to 'Edit', edit_transaction_path(transaction)
+          = edit_link_to 'Edit', edit_transaction_path(transaction), 'data-no-turbolink' => 1
           = destroy_link_to 'Destroy', transaction
 
 %br

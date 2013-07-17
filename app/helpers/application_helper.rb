@@ -25,8 +25,8 @@ module ApplicationHelper
     end
   end
 
-  def edit_link_to(title, url)
-    link_to url, class: 'btn btn-mini' do
+  def edit_link_to(title, url, options = {})
+    link_to url, options.merge!({ class: 'btn btn-mini' }) do
       content_tag(:i, nil, class: 'icon-edit') + title
     end
   end

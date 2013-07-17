@@ -1,14 +1,18 @@
 = show_title('Store', @store.name)
 
 %dl.dl-horizontal
-  %dt.muted Owner
-  %dd= @store.owner
-  %dt.muted Address
-  %dd= @store.address
-  %dt.muted Latitude
-  %dd= @store.latitude
-  %dt.muted Longitude
-  %dd= @store.longitude
+  - if @store.owner.present?
+    %dt.muted Owner
+    %dd= @store.owner
+  - if @store.address.present?
+    %dt.muted Address
+    %dd= @store.address
+  - if @store.latitude.present?
+    %dt.muted Latitude
+    %dd= @store.latitude
+  - if @store.longitude.present?
+    %dt.muted Longitude
+    %dd= @store.longitude
 
 .form-actions
   = link_to 'Edit', edit_store_path(@store), class: 'btn'
