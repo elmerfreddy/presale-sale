@@ -1,9 +1,9 @@
 %script{ type: 'text/html', id: 'tpl_product_list' }
-  %tr
+  %tr{ id: "product_{{id}}" }
     %td {{sequence}}
     %td {{name}}
     %td.number ${{price}}
-    %td {{quantity}}
+    %td.number {{quantity}}
     %td.number ${{total}}
     %td
       = link_to '#', title: 'Edit', class: 'edit-product' do

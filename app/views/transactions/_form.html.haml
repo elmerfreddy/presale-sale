@@ -52,7 +52,7 @@
             %th
             %th
             %th.muted Total
-            %th.number#selected-products-total
+            %th#selected-products-total.number
               - if @transaction.new_record? && !@transaction.store.present?
                 0
               - elsif @transaction.store.present?
