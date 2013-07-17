@@ -6,7 +6,12 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    if params[:q].present?
+      q = Product.search(name_cont: params[:q])
+      @products = q.result(distinct: true)
+    else
+      @products = Product.all
+    end
     respond_with @products
   end
 

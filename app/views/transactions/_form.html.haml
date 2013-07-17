@@ -1,31 +1,29 @@
 = render 'tpl_product'
+= render 'tpl_store'
+= render 'tpl_product_form'
+= render 'tpl_product_list'
 
 .row
-  = simple_form_for @transaction, html: { class: 'form-horizontal' } do |f|
-    .span5
-      = display_base_errors @transaction
-
-      .form-inputs
-        = f.association :store
-
-      #fields-add-product.form-inputs
+  .span5
+    .well
+      .control-group.select.optional.transaction_details_product
         .controls
-          = link_to '#', class: 'btn btn-success show-product-form' do
-            %i.icon-plus.icon-white
-            Add product
-      #fields-for-product.well{ style: 'display: none;' }
-        /- f.object.details.build
-        /= f.simple_fields_for :details do |f_detail|
-        /  = f_detail.input :product, as: :string
-        /  = f_detail.input :quantity
-        /.form-inputs
-        /  .controls
-        /    = link_to '#', class: 'btn btn-success', id: 'add-product' do
-        /      %i.icon-plus.icon-white
-        /      Add product
-        /    = link_to 'Cancel', '#', class: 'btn show-product-form'
+          = text_field_tag 'store', '', placeholder: 'Select store...', class: 'search-stores string optional', style: 'width: 98%;'
 
-    .span7
+    #fields-add-product.form-inputs
+      .controls
+        = link_to '#', class: 'btn btn-success show-product-form' do
+          %i.icon-plus.icon-white
+          Add product
+    #fields-for-product.well{ style: 'display: none;' }
+
+  = simple_form_for @transaction, html: { class: 'form-horizontal' } do |f|
+    = display_base_errors @transaction
+    #selected-products.span7
+      - if @transaction.new_record? && !@transaction.store.present?
+        %h2.muted Store name
+      - elsif @transaction.store.present?
+        %h2= @transaction.store_name
       %table.table.table-striped.table-hover
         %thead
           %tr
@@ -34,19 +32,19 @@
             %th Price
             %th Quantity
             %th Total
-            %th.span1
+            %th.span2
         %tbody
-          - Product.all.each_with_index do |product, index|
+          - @transaction.details.each_with_index do |detail, index|
             %tr
               %td= index + 1
-              %td= product.name
-              %td= number_to_currency product.price
-              %td 0
-              %td= number_to_currency 0
+              %td= detail.product_name
+              %td.number= number_to_currency detail.price
+              %td.number= detail.quantity
+              %td.number= number_to_currency detail.total
               %td
-                = link_to '#', title: 'Edit' do
+                = link_to '#', title: 'Edit', class: 'edit-product' do
                   %i.icon-edit
-                = link_to '#', title: 'Remove' do
+                = link_to '#', title: 'Remove', class: 'remove-product' do
                   %i.icon-remove
         %tfoot
           %tr
@@ -54,7 +52,11 @@
             %th
             %th
             %th.muted Total
-            %th= number_to_currency 100
+            %th.number#selected-products-total
+              - if @transaction.new_record? && !@transaction.store.present?
+                0
+              - elsif @transaction.store.present?
+                = number_with_precision @transaction.total, precision: 2
             %th
 
     .span12

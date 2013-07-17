@@ -9,6 +9,10 @@ class Transaction < ActiveRecord::Base
     store.present? ? store.name : ''
   end
 
+  def total
+    details.inject(0.0) { |s, d| s + d.total }
+  end
+
   def user_name
     user.present? ? user.full_name : ''
   end

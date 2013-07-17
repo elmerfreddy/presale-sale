@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130714190045) do
+ActiveRecord::Schema.define(version: 20130716221303) do
 
   create_table "details", force: true do |t|
     t.integer  "product_id"
     t.integer  "transaction_id"
-    t.integer  "quantity",       default: 0
+    t.integer  "quantity",                                default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "price",          precision: 10, scale: 2, default: 0.0
   end
 
   add_index "details", ["product_id"], name: "index_details_on_product_id", using: :btree

@@ -4,16 +4,16 @@
   %thead
     %tr
       %th Id
-      %th Name
-      %th Price
-      %th Created At
+      %th.span6 Name
+      %th.span2 Price
+      %th.span3 Created At
       %th
   %tbody
     - @products.each do |product|
       %tr
         %td= product.id
         %td= link_to product.name, product
-        %td= number_to_currency product.price
+        %td.number= number_to_currency product.price
         %td= l product.created_at, format: :long
         %td
           = edit_link_to 'Edit', edit_product_path(product)
