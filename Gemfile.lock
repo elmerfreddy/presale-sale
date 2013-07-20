@@ -1,3 +1,13 @@
+GIT
+  remote: git://github.com/ernie/ransack.git
+  revision: 43fff052ca7a850103c2ac122c99541cd34cf48d
+  branch: rails-4
+  specs:
+    ransack (0.7.3)
+      actionpack (~> 4.0.0)
+      activerecord (~> 4.0.0)
+      polyamorous (~> 0.6.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -73,6 +83,8 @@ GEM
     multi_json (1.7.7)
     orm_adapter (0.4.0)
     pg (0.15.1)
+    polyamorous (0.6.3)
+      activerecord (>= 3.0)
     polyglot (0.3.3)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -148,6 +160,7 @@ DEPENDENCIES
   pg
   rails (= 4.0.0)
   rails_12factor
+  ransack!
   sass-rails (~> 4.0.0)
   sdoc
   simple_form (>= 3.0.0.rc)

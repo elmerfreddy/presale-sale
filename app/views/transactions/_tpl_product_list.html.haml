@@ -1,0 +1,12 @@
+%script{ type: 'text/html', id: 'tpl_product_list' }
+  %tr{ id: "product_{{id}}" }
+    %td {{sequence}}
+    %td {{name}}
+    %td.number ${{price}}
+    %td.number {{quantity}}
+    %td.number ${{total}}
+    %td
+      = link_to '#', title: 'Edit', class: 'edit-product' do
+        %i.icon-edit
+      = link_to '#', title: 'Remove', class: 'remove-product' do
+        %i.icon-remove

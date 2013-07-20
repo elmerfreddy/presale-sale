@@ -1,9 +1,17 @@
 class StoresController < ApplicationController
   before_action :set_store, only: [:show, :edit, :update, :destroy]
 
+  respond_to :html, :json
+
   # GET /stores
   def index
-    @stores = Store.all
+    if params[:q].present?
+      q = Store.search(name_cont: params[:q])
+      @stores = q.result(distinct: true)
+    else
+      @stores = Store.all
+    end
+    respond_with @stores
   end
 
   # GET /stores/1

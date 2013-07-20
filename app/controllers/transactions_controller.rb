@@ -22,7 +22,7 @@ class TransactionsController < ApplicationController
 
   # POST /transactions
   def create
-    @transaction = Transaction.new(transaction_params)
+    @transaction = current_user.transactions.new(transaction_params)
 
     if @transaction.save
       redirect_to @transaction, notice: 'Transaction was successfully created.'
@@ -49,11 +49,11 @@ class TransactionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
-      @transaction = Transaction.find(params[:id])
+      @transaction = current_user.transactions.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def transaction_params
-      params.require(:transaction).permit(:user_id, :store_id)
+      params.require(:transaction).permit(:store_id, details_attributes: [:id, :product_id, :quantity, :price])
     end
 end

@@ -14,12 +14,12 @@
       %tr
         %td= transaction.id
         %td= transaction.user_name
-        %td= transaction.store_name
-        %td= link_to pluralize(0, 'product'), transaction
+        %td= link_to transaction.store_name, transaction.store
+        %td= link_to pluralize(transaction.details.count, 'product'), transaction
         %td= l transaction.created_at, format: :long
         %td
-          = edit_link_to 'Edit', edit_transaction_path(transaction)
+          = edit_link_to 'Edit', edit_transaction_path(transaction), 'data-no-turbolink' => 1
           = destroy_link_to 'Destroy', transaction
 
 %br
-= new_item_path('New Transaction', new_transaction_path)
+= new_item_path('New Transaction', new_transaction_path, 'data-no-turbolink' => 1)

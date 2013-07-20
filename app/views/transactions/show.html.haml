@@ -1,10 +1,38 @@
 = show_title(@transaction.user_name, @transaction.store_name)
 
-%dl.dl-horizontal
-  %dt.muted User
-  %dd= @transaction.user_name
-  %dt.muted Store
-  %dd= @transaction.store_name
+.row-fluid
+  .span5
+    %dl.dl-horizontal
+      %dt.muted User
+      %dd= @transaction.user_name
+      %dt.muted Store
+      %dd= @transaction.store_name
+
+  .span7
+    %table.table.table-striped.table-hover
+      %thead
+        %tr
+          %th #
+          %th.span7 Product
+          %th Price
+          %th Quantity
+          %th Total
+      %tbody
+        - @transaction.details.each_with_index do |detail, index|
+          %tr
+            %td= index + 1
+            %td= detail.product_name
+            %td.number= number_to_currency detail.price
+            %td= detail.quantity
+            %td.number= number_to_currency detail.total
+      %tfoot
+        %tr
+          %th
+          %th
+          %th
+          %th.muted Total
+          %th.number= number_to_currency @transaction.total
+          %th
 
 .form-actions
   = link_to 'Edit', edit_transaction_path(@transaction), class: 'btn'
