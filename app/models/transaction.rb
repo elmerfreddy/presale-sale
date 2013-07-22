@@ -5,6 +5,10 @@ class Transaction < ActiveRecord::Base
   has_many :details, dependent: :destroy
   accepts_nested_attributes_for :details, reject_if: :all_blank, allow_destroy: true
 
+  def details_count
+    details.count
+  end
+
   def store_name
     store.present? ? store.name : ''
   end
