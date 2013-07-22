@@ -21,7 +21,7 @@
 //= require typeahead
 //= require hogan
 //= require jquery.number
-//= require transactions
+// require transactions
 //= require_self
 
 $.fn.serializeObject = function() {
