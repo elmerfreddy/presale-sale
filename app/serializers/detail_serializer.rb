@@ -1,5 +1,3 @@
 class DetailSerializer < ActiveModel::Serializer
-  attributes :id, :quantity
-  has_one :product
-  has_one :transaction
+  attributes :id, :quantity, :product_name, :price, :total
 end

@@ -1,13 +1,17 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
 
+  respond_to :html, :json
+
   # GET /transactions
   def index
     @transactions = Transaction.all
+    respond_with @transactions
   end
 
   # GET /transactions/1
   def show
+    respond_with @transaction
   end
 
   # GET /transactions/new
@@ -24,10 +28,14 @@ class TransactionsController < ApplicationController
   def create
     @transaction = current_user.transactions.new(transaction_params)
 
-    if @transaction.save
-      redirect_to @transaction, notice: 'Transaction was successfully created.'
-    else
-      render action: 'new'
+    respond_with do |format|
+      if @transaction.save
+        format.html { redirect_to transactions_url, notice: 'Transaction was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @transaction }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+      end
     end
   end
 
