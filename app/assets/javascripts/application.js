@@ -18,10 +18,10 @@
 //= require bootstrap-modal
 //= require bootstrap-tab
 //= require bootstrap-tooltip
-// require typeahead
-// require hogan.js
+//= require typeahead
+//= require hogan.js
 //= require jquery.number
-// require transactions
+//= require transactions
 //= require_self
 
 //$.fn.serializeObject = function() {
