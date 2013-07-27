@@ -1,4 +1,5 @@
 class TransactionsController < ApplicationController
+  skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
 
   respond_to :html, :json
@@ -31,7 +32,7 @@ class TransactionsController < ApplicationController
     respond_with do |format|
       if @transaction.save
         format.html { redirect_to transactions_url, notice: 'Transaction was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @transaction }
+        format.json { render json: @transaction, status: :created, location: @transaction }
       else
         format.html { render action: 'new' }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
@@ -51,7 +52,10 @@ class TransactionsController < ApplicationController
   # DELETE /transactions/1
   def destroy
     @transaction.destroy
-    redirect_to transactions_url, notice: 'Transaction was successfully destroyed.'
+    respond_with do |format|
+      format.html { redirect_to transactions_url, notice: 'Transaction was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   private
